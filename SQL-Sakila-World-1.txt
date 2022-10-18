@@ -1,0 +1,187 @@
+Sakila & World Database Exercise Book
+
+Databases Exercises Introduction 
+
+This Exercise Book makes use of the Sakila and World databases which we have running for you in the cloud, please consult trainers on how to connect to these instances.
+These exercises should provide a good test for your knowledge of Structured Query Language (SQL). 
+Please work through this book at your own pace: it is more important that you use this book to enhance your SQL abilities than to speed through it as fast as you can without retaining anything.
+You do not need to store the answers to each Exercise in this book, but you are free to use it as an extension of your notes, if you wish. 
+
+Sakila Database Exercises
+
+Exercises Each Exercise should return at least one record, according to its individual specification. 
+1)Select all Actors from the table. 
+SELECT * FROM sakila.actor;
+
+2)Find the actor with the first name "John".
+SELECT * 
+FROM sakila.actor
+WHERE first_name = 'John'
+
+3)Find all actors with the surname "Neeson".
+SELECT * 
+FROM sakila.actor
+WHERE last_name = 'Neeson'
+
+4)Find all actors with Id numbers divisible by 10.
+
+5)What is the description of the movie with ID of 100? 
+SELECT * 
+FROM sakila.film
+WHERE film_id = 100
+
+6)Find every movie with a rating of "R". 
+SELECT * 
+FROM sakila.film
+WHERE rating = 'R'
+
+7)Find every movie except those with a rating of "R".
+SELECT * 
+FROM sakila.film
+WHERE rating != 'R'
+
+
+
+
+8)Find all movies with Deleted Scenes.
+SELECT * 
+FROM sakila.film
+WHERE special_features = 'Deleted Scenes'
+
+9)Which last names are not repeated?
+SELECT last_name, COUNT(last_name)
+FROM sakila.actor
+GROUP BY last_name
+HAVING COUNT(last_name) <= 1
+
+10)Which last names appear more than once?
+SELECT last_name, COUNT(last_name)
+FROM sakila.actor
+GROUP BY last_name
+HAVING COUNT(last_name) > 1
+
+11)Which actor has appeared in the most films?
+
+12)Is `Academy Dinosaur' available for rent from Store 1?
+
+13)What is that average running time of all the films in the database?
+SELECT AVG(length)
+FROM sakila.film
+
+14)What is the average running time of films by category?
+
+
+15)How many movies have Robots in them?
+
+16)Find the movie(s) with the longest runtime.
+
+17)Count how many movies were released in 2010.
+SELECT DISTINCT film_id, release_year
+FROM sakila.film
+WHERE release_year = 2010
+
+18)Return the full name of the staff member - in a column named full_name - with the ID of 1.
+SELECT *
+FROM sakila.staff
+WHERE staff_id = 1
+
+19)Retrieve all movies that Fred Costner has appeared in.
+SELECT *
+FROM sakila.actor 
+WHERE first_name = 'Fred'
+
+SELECT *
+FROM sakila.film_actor
+WHERE actor_id = 16
+
+20)Find out which location has the most copies of BUCKET BROTHERHOOD.
+
+21)How many distinct countries are there?
+SELECT COUNT(country_id)
+FROM sakila.country
+
+22)What are the names of all the languages in the database (sorted alphabetically)?
+SELECT *
+FROM sakila.language
+
+23)Return the full names (first and last) of actors with "son" in their last name, ordered by their first name. 
+SELECT *
+FROM sakila.actor
+WHERE last_name LIKE '%son%'
+ORDER BY first_name
+
+
+
+
+
+
+World Database Exercises 
+
+Each Exercise should return at least one record, according to its individual specification.
+
+1)Using COUNT, get the number of cities in the USA.
+SELECT COUNT(Name)
+FROM world.city
+WHERE CountryCode = 'USA'
+
+2)Find out what the population and average life expectancy for people in Argentina (ARG) is.
+SELECT Population, LifeExpectancy
+FROM world.country
+WHERE Code = 'ARG'
+
+3)Using IS NOT NULL, ORDER BY, LIMIT, what country has the highest life expectancy?
+
+4)Using JOIN . ON, what is the capital of Spain (ESP)?
+5)Using JOIN . ON, list all the languages spoken in the 'Southeast Asia' region.
+6)Select 25 cities around the world that start with the letter 'F' in a single SQL query.
+SELECT Name
+FROM world.city
+WHERE Name LIKE '%f%'
+
+7)Using COUNT, get the number of cities in China.
+SELECT COUNT(Name)
+FROM world.city
+WHERE CountryCode = 'CHN'
+
+8)Using IS NOT NULL, ORDER BY, & LIMIT, what country has the lowest population?
+9)Using aggregation, return the number of countries in the database.
+
+10)What are the top ten largest countries by population?
+SELECT TOP(10) Name, Population
+FROM world.country
+ORDER BY Population DESC
+
+11)List the top five largest cities in Japan.
+SELECT TOP(5) Name, Population
+FROM world.city
+WHERE CountryCode = 'JPN' 
+ORDER BY Population DESC
+
+12)List the names and country codes of every country which has Elizabeth II as its Head of State.
+SELECT COUNT(HeadofState)
+FROM world.country
+WHERE HeadOfState = 'Elisabeth II'
+
+13)List the top ten countries which have the smallest population-to-area ratio.
+14)List every unique world language, according to the World database.
+SELECT DISTINCT Language
+FROM world.countrylanguage
+
+15)What are the top 10 richest countries by GDP?
+SELECT TOP(10) Name, GNP
+FROM world.country
+ORDER BY GNP DESC
+16)What are the top 10 largest countries by surface area?
+17)List every country where over 50% of its population can speak French.
+18)Which country has the worst life expectancy?
+SELECT *
+FROM world.country
+WHERE LifeExpectancy is NOT NULL
+ORDER BY LifeExpectancy ASC
+
+19)What is the most common government form?
+SELECT GovernmentForm, COUNT(GovernmentForm)
+FROM world.country
+GROUP BY GovernmentForm
+
+20)How many countries have gained independence since records began?
